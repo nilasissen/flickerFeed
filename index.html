@@ -62,14 +62,12 @@
           </md-card-title-text>
           <md-card-title-media>
             <div class="md-media-lg card-media">
-              <a ng-href="#/{{it.id}}"><img ng-src="http://farm{{it.farm}}.static.flickr.com/{{it.server}}/{{it.id}}_{{it.secret}}_t.jpg"></a>
+              <a class="cursorPointer" ng-click="products.showAdvanced($event,it)"><img style="float: right;" ng-src="http://farm{{it.farm}}.static.flickr.com/{{it.server}}/{{it.id}}_{{it.secret}}_t.jpg"></a>
             </div>
           </md-card-title-media>
         </md-card-title>
         <md-card-actions layout="row" layout-align="end center">
           <md-button class="md-raised md-primary" ng-click="products.showAdvanced($event,it)">View</md-button>
-
-          <!-- <md-button>Action 2</md-button> -->
         </md-card-actions>
       </md-card>
 
