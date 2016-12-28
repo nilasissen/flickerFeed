@@ -1,0 +1,79 @@
+<html>
+<head>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body ng-app="myApp" ng-cloak ng-controller="ProductController as products" layout="column">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/Crawlink/material-angular-paging/master/build/dist.min.js"></script>
+  <script type="text/javascript" src="./js/zeloSpa.js"></script>
+  <!-- Angular Material Library -->
+<script type="text/ng-template" id="dialog1.tmpl.html"><md-dialog aria-label="">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{modalData.title}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <img class="fade" style="margin: auto; max-width: 100%;" alt="pic" data-ng-src="http://farm{{modalData.farm}}.static.flickr.com/{{modalData.server}}/{{modalData.id}}_{{modalData.secret}}_z.jpg">
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="close()">
+       Close
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+</script>
+
+  <!-- Modal to show details -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+  <div class="product-filter" layout>
+    <h1 flex class="md-headline">Flicker Feed</h1>
+    <cl-paging flex style="margin: 1em -6em;" cl-pages="products.paging.total" , cl-steps="6" , cl-page-changed="products.paging.onPageChanged()" , cl-align="center center" , cl-current-page="products.paging.current">
+  </cl-paging>
+  </div>
+
+  <section class="catalog" layout layout-wrap layout-align="center">
+ 
+    <md-card class="fade" ng-repeat="it in products.flickerRecentPics" md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+    <md-card-header class="flickerBoxHeader">
+          <md-card-header-text>
+            <span class="md-title" title="{{it.ownername}}">{{it.ownername | ellipsise : 22}}</span>
+            <span class="md-subhead">{{it.datetaken | date:'medium'}}</span>
+          </md-card-header-text>
+        </md-card-header>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline cursorPointer"  title="{{it.title}}">{{it.title | ellipsise : 7 }}</span>
+            <span class="md-subhead cursorPointer">{{it.datetaken | date}}</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media">
+              <a ng-href="#/{{it.id}}"><img ng-src="http://farm{{it.farm}}.static.flickr.com/{{it.server}}/{{it.id}}_{{it.secret}}_t.jpg"></a>
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-raised md-primary" ng-click="products.showAdvanced($event,it)">View</md-button>
+
+          <!-- <md-button>Action 2</md-button> -->
+        </md-card-actions>
+      </md-card>
+
+  </section>
+ 
+</body>
+</html>
