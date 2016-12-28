@@ -1,3 +1,0 @@
-1.Angular Material
-2.material-angular-paging
-3.
